@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+<script type="text/javascript">
+
+function drawShape()
+{ 
+   var canvas = document.getElementById("MyCanvas");
+	if(canvas.getContext){
+		var context = canvas.getContext("2d");
+		context.beginPath();								//开始绘图路径
+		context.arc(100,100,50,0,Math.PI/3);
+		context.closePath();								//关闭路径 
+		context.stroke();									//绘图
+		
+		context.beginPath();
+		//逆时针绘图
+		context.arc(300,100,50,0,Math.PI/3,true);
+		context.closePath();
+		context.stroke();
+		
+		context.beginPath();
+		context.arc(500,100,50,Math.PI/6,Math.PI*1.5);
+		context.closePath();
+		context.fill();
+		
+		context.beginPath();
+		context.arc(100,250,50,Math.PI/6,Math.PI*1.5,true);
+		context.closePath();
+		context.fill();
+		
+		context.beginPath();
+		context.strokeStyle = 'rgba(0,255,0,0.25)';
+		context.arc(300,250,50,0,Math.PI * 2);
+		context.closePath();
+		context.stroke();
+				
+		context.beginPath();
+		context.fillStyle = 'rgba(0,255,0,0.25)';
+		context.arc(500,250,50,0,Math.PI * 2,true);
+		context.closePath();
+		context.fill();
+	}
+
+}
+</script>
+</head>
+<body onload="drawShape();">
+
+<canvas id="MyCanvas" width="800" height="500" style="border: 10px #FFDAB9 solid">当前浏览器不支持canvas元素</canvas>
+    
+</div>
+
+</body>
+</html>

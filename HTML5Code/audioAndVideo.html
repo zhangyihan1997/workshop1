@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript">
+function PlayVideo(){
+   var v = document.getElementsByTagName("video")[0];  
+   v.play(); 
+}
+</script>
+</head>
+<body>
+<p>The next is to show a audio.</p>
+<!--
+      <audio controls>
+       <source src="Sleep_Away.mp3" type="audio/mp3" />
+       Your browser does not support the <audio> element.
+     </audio>
+    --> 
+
+       <video  width="300" height="200" controls>
+       <source src=¡°movie.ogg" type="video/ogg" />
+       <source src="movie.mp4" type="video/mp4" />
+       Your browser does not support the <video> element.   
+   </video>
+
+<input type="button" onclick="PlayVideo();"  value="Play"/>
+
+   
+</body>
+</html>

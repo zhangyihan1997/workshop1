@@ -1,0 +1,86 @@
+body
+{
+    margin:auto;
+    background-image:url("../img/background.jpg");
+    background-size:100%;
+	width: 900px;
+}
+#title
+{
+	margin-top:275px;
+	width:9000px;
+}
+#b
+{
+	margin-left:15px;
+	float:left;
+	width:600px;
+}
+.back
+{
+	width:100%;
+}
+
+h1
+{
+	color:pink;
+	font-size:60px;
+
+}
+
+#g
+{
+	float:right;
+	width:220px;
+}
+
+#h
+{
+	background-color:#C8C8C8;
+	height:60px;
+	margin:0 5px 0 5px;
+}
+
+#i
+{
+	background-color:#330000;
+	height:60px;
+	margin:0 5px 0 5px;
+}
+
+#j
+{
+	height:245px;
+	background-color:#00CCFF;
+	margin:0 5px 0 5px;
+}
+
+#k
+{
+	height:60px;
+	background-color:#33CC66;
+	margin:0 5px 0 5px;
+}
+
+#l
+{
+	height:60px;
+	background-color:#339933;
+	margin:0 5px 0 5px;
+}
+
+#time
+{
+    color:#FF00FF;
+}
+
+#cscore
+{
+	color:#FF0033;
+}
+.cards{
+	width: 16.5%;
+	margin-left: 4%;
+	float: left;
+	margin-top: 10px;
+}

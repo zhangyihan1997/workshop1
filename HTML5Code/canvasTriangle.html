@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+<script type="text/javascript">
+
+function drawShape()
+{ 
+   var canvas = document.getElementById("MyCanvas");
+	if(canvas.getContext){
+		var context = canvas.getContext("2d");
+		context.beginPath();								//开始绘图路径
+		context.lineWidth = 3;
+		context.strokeStyle = "Blue";
+		context.moveTo(30,30);								//起始位置
+		context.lineTo(150,30);								//目标坐标	
+		context.lineTo(250,100);							//目标坐标
+		context.closePath();								//关闭路径 
+		context.stroke();									//绘图
+		
+		context.beginPath();					//开始绘图
+		context.fillStyle = "yellow";		//填充颜色
+		context.shadowColor = "blue";
+		context.shadowBlur = 10;
+		context.shadowOffsetX= -3;
+		context.shadowOffsetY = -3;
+		context.moveTo(350,30);				//起始坐标
+		context.lineTo(350,100);			//目标坐标
+		context.lineTo(600,75);
+		context.closePath();				//关闭路径
+		context.fill();
+	}
+
+}
+</script>
+</head>
+<body onload="drawShape();">
+
+<canvas id="MyCanvas" width="800" height="500" style="border: 10px #FFDAB9 solid">当前浏览器不支持canvas元素</canvas>
+    
+</div>
+
+</body>
+</html>

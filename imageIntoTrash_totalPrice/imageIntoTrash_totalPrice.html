@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Image Recycle</title>
+<script>
+var intDeleNum = 0;
+var totalPrice = 0;
+
+function init()
+{		
+	var drag = document.getElementsByTagName("li");
+	for(var i = 0;i<drag.length;i++)
+	{
+		drag[i].addEventListener("dragstart",function(e){
+			var dt = e.dataTransfer;
+			dt.setData("text/plain",this.id);
+			console.log(dt);
+			console.log(this.id);
+		},false);
+	}
+	var recy = document.getElementById("laji");
+	recy.addEventListener("drop",function(e){
+		var dt = e.dataTransfer;
+		var intval = dt.getData("text/plain");
+		Drop(intval);
+	},false);
+}
+document.ondragover = function(e)
+{
+	e.preventDefault();
+}
+document.ondrop = function(e)
+{
+	e.preventDefault();
+}
+
+function Drop(id)
+{
+	var node = document.getElementById(id);
+	var price=node.value;
+	node.parentNode.removeChild(node);
+	totalPrice += parseInt(price);
+	intDeleNum++;
+	document.getElementById("status").style.display = "block";
+	//document.getElementById("pStatus").innerHTML = "Deleted"+intDeleNum+"pictures!";
+	document.getElementById("pStatus").innerHTML = "Total Price: "+totalPrice;
+}
+</script>
+<style>
+ul li{
+	float:left;
+	list-style-type:none;
+	list-style:none;
+	margin:10px;
+}
+ul li img{
+	width:150px;
+	height:100px;
+}
+#laji{
+	background-image: url(images/5.gif);
+	border: 1px solid gray;
+	width: 203px;
+	height: 254px;
+	position: absolute;
+	left: 290px;
+	top: 260px;
+}
+#picList{
+	height:150px;
+	width:800px;
+}
+#status{
+	text-align:center;
+	width:800px;
+	height:40px;
+}
+.del{
+	background:#CECECE;
+	border:1px solid #CAD9D7;
+	font-size:14px;
+	width:200px;
+	text-align:center;
+	margin-left:300px;
+}
+</style>
+</head>
+
+<body onLoad="init();">
+<h2>Picture Recycling</h2>
+<div id="picList">
+<ul>
+<li id="li01" value="10"><img src="images/1.jpg" draggable="true" /></li>
+<li id="li02" value="20"><img src="images/2.jpg" draggable="true" /></li>
+<li id="li03" value="30"><img src="images/3.jpg" draggable="true" /></li>
+<li id="li04" value="40"><img src="images/4.jpg" draggable="true" /></li>
+</ul>
+</div>
+<div id="status" style="display:none;"><p id="pStatus" class="del"></p></div>
+<div id="laji"></div>
+</body>

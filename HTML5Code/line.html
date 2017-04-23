@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+<script type="text/javascript">
+
+function drawFace()
+{ 
+   var mycanvas  = document.getElementById("MyCanvas");
+if(mycanvas.getContext){
+	var mycontext = mycanvas.getContext("2d");
+	var x,y,x2,y2,r,g,b;
+	function line() {
+		x=Math.floor(Math.random()*190) + Math.floor(Math.random()*190);
+		y=Math.floor(Math.random()*190) + Math.floor(Math.random()*190);
+		x2=Math.floor(Math.random()*190) + Math.floor(Math.random()*190);
+		y2=Math.floor(Math.random()*190) + Math.floor(Math.random()*190);
+		r=Math.floor(Math.random()*255);
+		g=Math.floor(Math.random()*255);
+		b=Math.floor(Math.random()*255);
+		mycontext.moveTo(x, y);			//Original point
+		mycontext.lineTo(x2, y2);		//target point
+		mycontext.strokeStyle='rgb(' + r + ',' + g +  ',' + b + ')';  
+		mycontext.lineWidth=Math.floor(Math.random()*6);      
+		mycontext.stroke();
+		mycontext.restore();
+	}
+}
+
+setInterval(line, 500);
+
+}
+</script>
+</head>
+<body onload="drawFace();">
+
+<canvas id="MyCanvas" width="500" height="500" style="border: 10px #FFDAB9 solid">Your browser doesn't support canvas!</canvas>
+    
+</div>
+
+</body>
+</html>

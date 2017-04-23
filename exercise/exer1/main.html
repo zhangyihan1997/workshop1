@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>book store</title>
+<script>
+var intDeleNum = 0;
+var price= [23,24,25];
+var myprice = 0;
+function init()
+{		
+
+	var drag = document.getElementsByTagName("li");
+	for(var i = 0;i<drag.length;i++)
+	{
+		drag[i].addEventListener("dragstart",function(e){
+			var dt = e.dataTransfer;
+			dt.setData("text/plain",this.id);
+		},false);
+	}
+	var recy = document.getElementById("books");
+	recy.addEventListener("drop",function(e){
+		var dt = e.dataTransfer;
+		var intval = dt.getData("text/plain");
+		Drop(intval);
+	},false);
+}
+document.ondragover = function(e)
+{
+	e.preventDefault();
+}
+document.ondrop = function(e)
+{
+	e.preventDefault();
+}
+
+function Drop(id)
+{
+	var node = document.getElementById(id);
+	node.parentNode.removeChild(node);
+	var idno = id.substring(2,4);
+
+	myprice+= price[parseInt(idno)-1];
+	document.getElementById("status").style.display = "block";
+	document.getElementById("pStatus").innerHTML = "all price is"+myprice;
+}
+</script>
+<style>
+ul li{
+	float:left;
+	list-style-type:none;
+	list-style:none;
+	margin:10px;
+}
+
+}
+#books{
+	background-image: url(images/5.gif);
+	border: 1px solid gray;
+	width: 203px;
+	height: 254px;
+	
+	left: 290px;
+	top: 260px;
+}
+#picList{
+	height:150px;
+	width:800px;
+}
+#status{
+	text-align:center;
+	width:800px;
+	height:40px;
+}
+.del{
+	background:#CECECE;
+	border:1px solid #CAD9D7;
+	font-size:14px;
+	width:200px;
+	text-align:center;
+	margin-left:300px;
+}
+</style>
+</head>
+
+<body onLoad="init();">
+<h2>book store</h2>
+<div id="picList">
+<ul>
+<li id="li01"><img src="books1.jpg" draggable="true" alt="23" /><p class="prise">$23</p></li>
+<li id="li02"><img src="books2.jpg" draggable="true" alt="22" /><p class="prise">$24</p></li>
+<li id="li03"><img src="books3.jpg" draggable="true" alt="21" /><p class="prise">$25</p></li>
+</ul>
+
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<h1>shopping card</h1>
+<div id="status" style="display:none;"><p id="pStatus" class="del"></p></div>
+<div id="books"><img src="shoppingcard.png"><p class="prise">$</p></div>
+</body>
+
+</body>
+</html>

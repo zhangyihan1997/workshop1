@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Smiling Face</title>
+<meta charset="utf-8" />
+<style>
+div#main {
+   margin:0 auto;
+   text-align:center;
+}
+div.title {
+   font-size: 40px;
+   font-family:monospace;
+}
+canvas {
+}
+</style>
+</head>
+<body>
+   <div id="main">
+     <canvas height="600" width="600" id="face" style="background-color:pink">
+       <p>You need canvas!</p>
+     </canvas>
+    <div class="title">Smiling Face in HTML 5</div>
+   </div>
+
+<script>
+var canvas = null;   //The canvas object
+var context = null;   //The canvas context
+var c_width;   //Canvas width
+var c_height;   //Canvas height
+
+initFace();
+
+function initFace() {
+   canvas = document.getElementById("face");
+   context = canvas.getContext("2d");
+
+   c_width = canvas.offsetWidth;
+   c_height = canvas.offsetHeight;
+
+   //draw the face
+   drawSmileyFace();
+}
+
+function drawSmileyFace() {
+   drawFace();
+   drawLeftEye();
+   drawRightEye();
+   drawNose();
+   drawSmile();
+   drawLines();
+}
+
+function drawFace() {
+   // face
+   context.beginPath();
+   context.arc(c_width/2,   // x   x,y is at the center
+         c_height/2,   // y
+         200,      // arc radius
+         0,         // starting angle
+         degreesToRadians(360), // ending angle
+         true);        // counter-clockwise
+   context.fillStyle = "yellow";
+   context.fill();
+   context.stroke();
+}
+function drawLeftEye(dx, dy) {
+   x = 200;
+   y = 250;
+
+   dx = dx || 0;
+   x1 = x + parseFloat(dx);
+
+   dy = dy || 0;
+   y1 = y + parseFloat(dy);
+
+   // left eye
+   context.beginPath();
+   context.arc(x, y, 25, 0, degreesToRadians(360), true);
+   context.fillStyle = "#FFFFFF";
+   context.fill();
+   context.strokeStyle = '#000000';
+   context.stroke();
+   //inner left eye
+   context.beginPath();
+   context.arc(x1, y1, 20, 0, degreesToRadians(360), true);
+   context.fillStyle = "blue";
+   context.fill();
+   context.strokeStyle = 'blue';
+   context.stroke();
+}
+
+function drawRightEye(dx, dy) {
+   x = 400;
+   y = 250;
+
+   dx = dx || 0;
+   x1 = x + parseFloat(dx);
+
+   dy = dy || 0;
+   y1 = y + parseFloat(dy);
+
+   // right eye
+   context.beginPath();
+   context.arc(x, y, 25, 0, degreesToRadians(360), true);
+   context.fillStyle = "#FFFFFF";
+   context.fill();
+   context.strokeStyle = '#000000';
+   context.stroke();
+   //inner right eye
+   context.beginPath();
+   context.arc(x1, y1, 20, 0, degreesToRadians(360), true);
+   context.fillStyle = "blue";
+   context.fill();
+   context.strokeStyle = 'blue';
+   context.stroke();
+}
+function drawNose() {
+   // nose
+   context.strokeStyle = 'purple';
+   context.fillStyle = "purple";
+   context.beginPath();
+   context.moveTo(300, 300);
+   context.lineTo(325, 325);
+   context.lineTo(300, 350);
+   context.lineTo(275, 325);
+   context.closePath();
+   context.fill();
+}
+function drawSmile() {
+   // start angle is to the right of the center point. So to draw a
+   // semi-circle that's open at the top, like for the mouth in a 
+   // smile, you need to draw in a clockwise direction.
+   // angle is the number of degrees we take off the edges of the 
+   // semi circle to give a more realistic mouth look.
+   context.strokeStyle = 'red';
+   context.fillStyle = "red";
+   context.beginPath();
+   context.moveTo(200,410);
+   context.lineTo(300,450);
+   context.lineTo(400,410);
+   context.closePath();
+   context.fill();
+   //context.arc(300, 350, 75, degreesToRadians(0), degreesToRadians(180), false);
+   context.stroke();
+}
+
+function getMousePos(canvas, evt) {
+   var rect = canvas.getBoundingClientRect();
+   return {
+     x: evt.clientX - rect.left,
+     y: evt.clientY - rect.top
+   };
+}
+canvas.addEventListener('mousemove', function(evt) {
+   var mousePos = getMousePos(canvas, evt);
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   var eyeY = 250;     //distance from top
+   var leyeX = 200;   //distance of left eye from left
+   var reyeX = 400;   //distance of right eye from left
+   var ldx = 0;     //deviation of left eye from left
+   var rdx = 0;     //deviation of right eye from left
+   var ldy = 0;     //deviation of left eye from top
+
+   if (eyeY > mousePos.y) {
+     ldy = 100 - (mousePos.y/eyeY * 100);
+     ldy = (ldy * 5) / 100;
+     ldy = 0 - ldy;
+   } else {
+     ldy = 100 - ((c_height - mousePos.y)/(c_height - eyeY) * 100);
+     ldy = (ldy * 5) / 100;
+   }
+
+   if (leyeX < mousePos.x) {
+    //left eye
+    ldx = 100 - ((c_width - mousePos.x)/(c_width - leyeX) * 100);
+    ldx = (ldx * 5) / 100;
+
+    //right eye
+    rdx = 100 - ((c_width - mousePos.x)/(c_width - reyeX) * 100);
+    rdx = (rdx * 5) / 100;
+   } else {
+    //left eye
+    ldx = 100 - (mousePos.x/leyeX) * 100;
+    ldx = (ldx * 5) / 100;
+    ldx = 0 - ldx;
+
+    //right eye
+    rdx = 100 - (mousePos.x/reyeX) * 100;
+    rdx = (rdx * 5) / 100;
+    rdx = 0 - rdx;
+   }
+
+   drawFace();
+   drawLeftEye(ldx, ldy);
+   drawRightEye(rdx, ldy);
+   drawNose();
+   drawSmile();
+
+}, false);
+
+canvas.addEventListener('mousedown', function(evt){
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   drawFace();
+   drawLeftEye();
+   drawRightEye();
+   drawNose();
+   context.strokeStyle = 'red';
+   context.fillStyle = "red";
+   context.beginPath();
+   context.arc(300, 335, 115, degreesToRadians(30), degreesToRadians(150), false);
+   context.stroke();
+}, false);
+
+function degreesToRadians(degrees) {
+   radians = (degrees * Math.PI)/180;
+   return radians;
+}
+
+</script>
+
+</body>
+</html>
